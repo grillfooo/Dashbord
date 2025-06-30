@@ -35,7 +35,7 @@ import {
 
 const data = {
   user: {
-    name: "shadcn",
+    name: "ghost",
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
@@ -51,8 +51,8 @@ const data = {
       icon: IconListDetails,
     },
     {
-      title: "Analytics",
-      url: "#",
+      title: "Stock Analytics",
+      url: "/dashboard/stocks", // Example route for stocks dashboard     
       icon: IconChartBar,
     },
     {
@@ -64,6 +64,11 @@ const data = {
       title: "Team",
       url: "#",
       icon: IconUsers,
+    },
+    {
+      title: "Data Library",
+      url: "#",
+      icon: IconDatabase,
     },
   ],
   navClouds: [
@@ -134,7 +139,7 @@ const data = {
   documents: [
     {
       name: "Data Library",
-      url: "#",
+      url: "/dashboard/stocks/",
       icon: IconDatabase,
     },
     {
