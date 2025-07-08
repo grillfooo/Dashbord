@@ -4,12 +4,22 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
+import jwt from "jsonwebtoken"
+
+export function verifyToken(token: string) {
+  const secret = process.env.JWT_SECRET!
+  return jwt.verify(token, secret)
+}
+type LoginFormInputs = {
+  email: string;
+  password: string;
+};
 
 export default function Login() {
-  const { register, handleSubmit } = useForm()
-  const router = useRouter()
+  const { register, handleSubmit } = useForm<LoginFormInputs>();
+  const router = useRouter();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: LoginFormInputs) => {
     const res = await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify(data),

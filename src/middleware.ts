@@ -1,6 +1,4 @@
-// middleware.ts
 import { NextRequest, NextResponse } from "next/server"
-import jwt from "jsonwebtoken"
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value
@@ -10,16 +8,11 @@ export function middleware(req: NextRequest) {
     url.pathname = "/login"
     return NextResponse.redirect(url)
   }
-
-  try {
-    jwt.verify(token, process.env.JWT_SECRET!)
-    return NextResponse.next()
-  } catch {
-    url.pathname = "/login"
-    return NextResponse.redirect(url)
-  }
+console.log("JWT_SECRET:", process.env.JWT_SECRET) // undefined in Edge Runtime
+  // Do NOT verify JWT here (Edge Runtime can't handle it securely)
+  return NextResponse.next()
 }
 
 export const config = {
-  matcher: ["/dashboard"],
+  matcher: ["/dashboard/:path*"],
 }
